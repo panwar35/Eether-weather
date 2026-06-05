@@ -5,11 +5,6 @@ Home
 {% endblock %}
 
 {% block content %}
-
-<body class="bg-surface text-on-surface overflow-x-hidden max-w-full">
-<div class="flex">
-<!-- Main Content Area -->
-<main class="flex-1 w-full min-h-screen max-w-full overflow-hidden">
 <!-- Hero Section -->
 <section class="relative h-[65vh] w-full flex flex-col justify-end overflow-hidden">
 <!-- Immersive Background Image -->
@@ -21,12 +16,12 @@ Home
 <div class="relative z-10 px-container-margin pb-lg max-w-4xl">
 <div class="flex flex-col md:flex-row md:items-end gap-sm md:gap-lg animate-fade-in">
 <div>
-<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-xs">San Francisco, CA</h1>
-<p class="font-body-lg text-body-lg text-white/80">Partly Cloudy • High: 72° Low: 58°</p>
+<h1 id="city" class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-xs">Loading</h1>
+<p id="condition"class="font-body-lg text-body-lg text-white/80">Loading weather...</p>
 </div>
 <div class="flex items-baseline">
-<span class="font-display-temp text-display-temp text-white">68°</span>
-<span class="font-headline-md text-headline-md text-white/60 ml-md">F</span>
+<span id="temp" class="font-display-temp text-display-temp text-white">__°</span>
+<span class="font-headline-md text-headline-md text-white/60 ml-md">C</span>
 </div>
 </div>
 <div class="mt-lg flex flex-wrap gap-md">
@@ -315,8 +310,5 @@ Home
 <button class="mt-sm font-label-caps text-label-caps text-primary hover:underline text-left">View full map</button>
 </div>
 </section>
-</main>
-</div>
-</body>
 
 {% endblock %}

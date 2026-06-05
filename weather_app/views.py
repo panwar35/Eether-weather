@@ -7,7 +7,10 @@ def home(request):
 def location(request):
     return render(request, 'weather_app/location.html')
 
-API_KEY = "YOUR_API_KEY"
+API_KEY = "e952c44ec69ed7e99ee87c8f5f9b74c9"
+
+from django.http import JsonResponse
+import requests
 
 def weather_api(request):
     city = request.GET.get("city")
@@ -20,10 +23,16 @@ def weather_api(request):
         city = city or "Sardhana"
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
 
-    data = requests.get(url).json()
+    response = requests.get(url)
+    data = response.json()
 
-    if "main" not in data:
-        return JsonResponse({"error": "Weather not found"}, status=400)
+    print("OpenWeatherMap Response:", data)
+
+    if response.status_code != 200:
+        return JsonResponse({
+            "error": data.get("message", "Unknown error"),
+            "full_response": data
+        }, status=response.status_code)
 
     return JsonResponse({
         "city": data["name"],

@@ -126,28 +126,34 @@
     {% endblock %}
 </head>
 
-<body class="bg-surface text-on-surface overflow-x-hidden">
+<body class="bg-surface text-on-surface overflow-x-hidden max-w-full">
 
-    <!-- Navbar -->
-    {% block navbar %}
-    {% include 'weather_app/partials/navbar.html' %}
+    <!-- GLOBAL SIDEBAR (must be outside navbar block) -->
     {% include 'weather_app/components/settings_sidebar.html' %}
-{% endblock %}
 
-    <!-- Main Content -->
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+    <div class="flex">
 
-    <!-- Footer -->
-    {% include 'weather_app/partials/footer.html' %}
+        <!-- MAIN AREA -->
+        <main class="flex-1 w-full min-h-screen max-w-full overflow-hidden">
 
-    <!-- Global JS -->
+            <!-- NAVBAR -->
+            {% block navbar %}
+                {% include 'weather_app/partials/navbar.html' %}
+            {% endblock %}
+
+            <!-- PAGE CONTENT -->
+            {% block content %}{% endblock %}
+
+            <!-- FOOTER -->
+            {% include 'weather_app/partials/footer.html' %}
+
+        </main>
+    </div>
+
+    <!-- GLOBAL JS -->
     <script src="{% static 'weather_app/js/script.js' %}"></script>
 
-    {% block extra_js %}
-    {% endblock %}
+    {% block extra_js %}{% endblock %}
 
 </body>
 </html>
