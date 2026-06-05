@@ -1,0 +1,39 @@
+<!-- Settings Sidebar Overlay -->
+<div class="fixed inset-0 bg-surface-container-lowest/60 backdrop-blur-sm z-[60] opacity-0 pointer-events-none" id="settingsSidebarOverlay"></div>
+<!-- Settings Sidebar -->
+<aside class="fixed top-0 right-0 h-full w-[320px] max-w-[90vw] glass-dark z-[70] flex flex-col shadow-2xl translate-x-full" id="settingsSidebar">
+<div class="p-xl border-b border-white/10 flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Settings</h2>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface transition-colors" id="closeSettings">close</button>
+</div>
+<div class="flex-1 overflow-y-auto p-xl space-y-xl">
+<!-- Unit System -->
+<div class="space-y-md">
+<h3 class="font-label-caps text-label-caps text-primary uppercase">Unit System</h3>
+<div class="grid grid-cols-2 gap-sm p-1 glass rounded-xl transition-all duration-700 opacity-100 translate-y-0">
+<button class="py-1.5 rounded-lg text-label-caps transition-all text-on-surface-variant" data-unit="imperial">Imperial (°F)</button>
+<button class="py-1.5 rounded-lg text-label-caps hover:bg-white/5 transition-all bg-primary text-on-primary active-pill" data-unit="metric">Metric (°C)</button>
+</div>
+</div>
+<!-- Appearance -->
+<div class="space-y-md">
+<h3 class="font-label-caps text-label-caps text-primary uppercase">Appearance</h3>
+<div class="flex justify-between items-center glass p-md rounded-xl transition-all duration-700 opacity-100 translate-y-0">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+<span class="font-body-lg text-body-lg">Dark Mode</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Notifications -->
+<div class="space-y-md">
+</div>
+</div>
+<div class="p-xl border-t border-white/10">
+<button class="w-full bg-primary text-on-primary py-lg rounded-xl font-label-caps text-label-caps active:scale-[0.98] transition-transform shadow-lg shadow-primary/20" id="saveSettings">SAVE CHANGES</button>
+</div>
+</aside>

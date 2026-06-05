@@ -2,6 +2,7 @@
 
 {% block navbar %}
     {% include 'weather_app/partials/location_navbar.html' %}
+    {% include 'weather_app/components/settings_sidebar.html' %}
 {% endblock %}
 
 {% block title %}
@@ -163,25 +164,6 @@ Locations
 </div>
 </section>
 </main>
-<!-- BottomNavBar (Mobile only) -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-3 pb-safe h-14 md:hidden bg-white/10 dark:bg-white/10 backdrop-blur-xl border-t border-white/15 rounded-t-lg shadow-lg">
-<a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
-<span class="material-symbols-outlined text-[18px]" data-icon="home">home</span>
-<span class="font-label-caps text-[8px] mt-0.5">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
-<span class="material-symbols-outlined text-[18px]" data-icon="radar">radar</span>
-<span class="font-label-caps text-[8px] mt-0.5">Radar</span>
-</a>
-<a class="flex flex-col items-center justify-center bg-primary/20 text-primary rounded-lg p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
-<span class="material-symbols-outlined text-[18px]" data-icon="notifications" style="font-variation-settings: &quot;FILL&quot; 1;">notifications</span>
-<span class="font-label-caps text-[8px] mt-0.5">Alerts</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
-<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
-<span class="font-label-caps text-[8px] mt-0.5">Settings</span>
-</a>
-</nav>
 <script>
         const searchInput = document.querySelector('input');
         const recentSearches = document.querySelector('section:first-of-type div:last-child');
