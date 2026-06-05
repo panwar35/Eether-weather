@@ -37,5 +37,11 @@ def weather_api(request):
     return JsonResponse({
         "city": data["name"],
         "temp": data["main"]["temp"],
-        "condition": data["weather"][0]["description"]
+        "condition": data["weather"][0]["description"],
+        "humidity": data["main"]["humidity"],
+        "wind": data["wind"]["speed"],
+        "visibility": data["visibility"] / 1000,
+        "pressure": data["main"]["pressure"],
+        "feels_like": data["main"]["feels_like"]
+        
     })

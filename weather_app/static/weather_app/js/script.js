@@ -133,6 +133,11 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('city').innerText = data.city;
             document.getElementById('temp').innerText = data.temp + "°C";
             document.getElementById('condition').innerText = data.condition;
+            document.getElementById('humidity').innerText = data.humidity + "%";
+            document.getElementById('wind').innerText = data.wind + " m/s";
+            document.getElementById('visibility').innerText = data.visibility + " km";
+            document.getElementById('pressure').innerText = data.pressure + " hPa";
+            document.getElementById('feels_like').innerText = data.feels_like + "°C";
         });
 
 });
