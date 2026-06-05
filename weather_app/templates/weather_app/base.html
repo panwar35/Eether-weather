@@ -129,7 +129,9 @@
 <body class="bg-surface text-on-surface overflow-x-hidden">
 
     <!-- Navbar -->
+    {% block navbar %}
     {% include 'weather_app/partials/navbar.html' %}
+{% endblock %}
 
     <!-- Main Content -->
     <main>

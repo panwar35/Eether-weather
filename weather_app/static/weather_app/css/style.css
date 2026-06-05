@@ -27,3 +27,18 @@ body {
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #0b1326; }
 ::-webkit-scrollbar-thumb { background: #2d3449; border-radius: 8px; }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#settingsSidebar {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#settingsSidebarOverlay {
+    transition: opacity 0.3s ease;
+}

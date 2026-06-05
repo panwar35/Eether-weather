@@ -1,17 +1,204 @@
 {% extends 'weather_app/base.html' %}
 
+{% block navbar %}
+    {% include 'weather_app/partials/location_navbar.html' %}
+{% endblock %}
+
 {% block title %}
 Locations
 {% endblock %}
 
 {% block content %}
 
-<section class="p-10">
-
-    <h1 class="text-4xl font-bold">
-        Saved Locations
-    </h1>
-
+<body class="bg-surface-dim text-on-surface overflow-x-hidden"> 
+<main class="max-w-4xl mx-auto px-container-margin py-lg space-y-lg">
+<!-- Search Section -->
+<section class="w-full space-y-sm">
+<div class="relative group">
+<svg class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/70 group-focus-within:text-primary transition-colors pointer-events-none" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+<input class="w-full pl-9 pr-3 py-3 bg-white/5 border border-white/15 rounded-lg backdrop-blur-md focus:bg-white/10 focus:border-primary/50 focus:ring-0 text-on-surface placeholder:text-on-surface-variant/50 transition-all font-body-lg text-body-lg" placeholder="Search for a city or airport..." type="text">
+</div>
+<div class="flex flex-wrap gap-xs items-center opacity-70">
+<span class="font-label-caps text-label-caps text-on-surface-variant mr-xs">RECENT SEARCHES</span>
+<button class="px-2 py-1 glass-panel rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all relative group">Paris, FR<span class="material-symbols-outlined invisible group-hover:visible absolute -top-1 -right-1 text-[10px] bg-surface-variant rounded-full p-0.5 border border-white/20 hover:text-error transition-colors" data-icon="close">close</span></button>
+<button class="px-2 py-1 glass-panel rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all relative group">Reykjavik, IS<span class="material-symbols-outlined invisible group-hover:visible absolute -top-1 -right-1 text-[10px] bg-surface-variant rounded-full p-0.5 border border-white/20 hover:text-error transition-colors" data-icon="close">close</span></button>
+<button class="px-2 py-1 glass-panel rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all relative group">Berlin, DE<span class="material-symbols-outlined invisible group-hover:visible absolute -top-1 -right-1 text-[10px] bg-surface-variant rounded-full p-0.5 border border-white/20 hover:text-error transition-colors" data-icon="close">close</span></button>
+</div>
 </section>
+<!-- Current Location Card -->
+<section class="space-y-sm">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: &quot;FILL&quot; 1;">near_me</span>
+                CURRENT LOCATION
+            </h2>
+<div class="relative w-full rounded-lg overflow-hidden glass-panel glass-edge group cursor-pointer active:scale-[0.99] transition-transform shadow-lg shadow-black/20 h-48 md:h-64 hover:bg-white/10 hover:shadow-xl" onclick="window.location.href='/'">
+<img class="absolute inset-0 w-full h-full object-cover brightness-[0.4] group-hover:scale-105 transition-transform duration-700" data-alt="A cinematic wide shot of a modern city skyline at dusk with soft purple and blue ambient lighting. The atmosphere is crisp and clear, with distant skyscrapers glowing softly against a twilight sky, perfectly capturing the high-end glassmorphic aesthetic of the weather application's professional and serene interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzQKgnVuRs0W2hINDjJQ877XuAZ-UJqi1lJcjLVXUWF7lt2e4hwE_R_WQek45BPVMoFgkZWm9mT13GEKN9Q9wiM0ZCMwf_rIJU7c3vbVLEF-zWBbXQTpuFg3BQBj8AcNExDtoFZ0oABUXhw0zfIeAKWlKMyEv4i6fScIJ72fRNknAluzHnFUxPtKPURq1WyB6TUZcgombV5kSjV72_8JjVG-94TcPCddQuE81JZ4xdC-eK3-dY6qh-8lLBrdTpfq8cjkIOnTBTzQ">
+<div class="relative h-full flex items-center justify-between px-lg">
+<div class="space-y-xs">
+<p class="font-headline-lg text-headline-lg text-white">San Francisco</p>
+<p class="font-body-lg text-body-lg text-white/70">Partly Cloudy • High 19° Low 12°</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="material-symbols-outlined text-secondary text-[36px]" style="font-variation-settings: &quot;FILL&quot; 1;">partly_cloudy_day</span>
+<p class="font-display-temp text-display-temp text-white">16°</p>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-secondary-container to-transparent opacity-50"></div>
+</div>
+</section>
+<!-- Saved Locations Grid -->
+<section class="space-y-sm">
+<div class="flex justify-between items-center">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">SAVED LOCATIONS</h2>
+<button class="font-label-caps text-label-caps text-primary hover:underline transition-all">EDIT LIST</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Location Card: Tokyo -->
+<div class="relative aspect-[16/10] md:aspect-square rounded-lg overflow-hidden glass-panel glass-edge group cursor-pointer active:scale-[0.99] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover brightness-[0.5] group-hover:scale-110 transition-transform duration-1000" data-alt="A breathtaking night view of Tokyo, Japan, showcasing the iconic Tokyo Tower glowing intensely orange against a deep navy sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbBc5_25MrpzKHvB7MvaXLXdSOGy7_OGLbkIWc0BQCuzGfoVrjmtiG-7Ly_nDXCMlJU4MiJgIG-GPv9HInTnUzjPkzrwc5AiAGe48r9Rt01F88JP3Fm2wKuBCg5GtTwTMhPIvmDXOTVj56pfoo_sAw-jUTtU6BeThMygUCRZia9kFNsrlzpDzWq46BkaoVl7EsC4u5SeA1RDpM03a_1iPPUIrhYczuMaGx3XRP31K_2t07X2LsEjKA_7rFaaTbqN8cevAgcznUSA">
+<div class="relative h-full p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-white">Tokyo</h3>
+<p class="font-body-sm text-white/60">JP • 11:42 PM</p>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">thunderstorm</span>
+</div>
+<div class="flex items-end justify-between">
+<div class="space-y-xs">
+<p class="font-label-caps text-tertiary">STORM WARNING</p>
+<p class="font-display-temp text-[36px] leading-tight text-white">24°</p>
+</div>
+<div class="text-right">
+<p class="font-body-sm text-white/80">Hum: 82%</p>
+<p class="font-body-sm text-white/80">Wind: 14km/h</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Card: London -->
+<div class="relative aspect-[16/10] md:aspect-square rounded-lg overflow-hidden glass-panel glass-edge group cursor-pointer active:scale-[0.99] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover brightness-[0.5] group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQwCJOdSSTbCA19not0flKpXn2mu0uXSMjI_nGpof-0RPDQ6Zq_S2B-28PEqn2GhmtJqywUWg3Vb6YEZf0wxjpDpFVHhHGbhAhS-Iwr1C9WLigQRTSlzuRCJjcGNduBoTvp416zAoIGMGiIcO1AiQhgCPW734KR-Bnv64a4eHRgUY4HPmxNTQN9tbJkf0qqcep18dhR-QHmrWsE5vyzZhQHHlE_p9YrQWoNlEQb0sMtwY8OU7hxO3LgMMTalGtIBB2AeBMRTJS_w">
+<div class="relative h-full p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-white">London</h3>
+<p class="font-body-sm text-white/60">UK • 2:42 PM</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">cloudy</span>
+</div>
+<div class="flex items-end justify-between">
+<div class="space-y-xs">
+<p class="font-label-caps text-primary">OVERCAST</p>
+<p class="font-display-temp text-[36px] leading-tight text-white">14°</p>
+</div>
+<div class="text-right">
+<p class="font-body-sm text-white/80">Hum: 65%</p>
+<p class="font-body-sm text-white/80">Wind: 22km/h</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Card: New York -->
+<div class="relative aspect-[16/10] md:aspect-square rounded-lg overflow-hidden glass-panel glass-edge group cursor-pointer active:scale-[0.99] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover brightness-[0.5] group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClJOHkioGPpM9WBpB4lEU_NlsmZPVHoe8dkk4qOdHzwFn94gF-yvS_7AVCtQzQHBZT9t6Em1P0Ti4C-fdBK3SiskrGOM6ag9UYFrJCSxNpBVwI4ebBSJNPEPvh2XvQ-q_A44HNDGILslvD6eD27Lr31ur_NqkAL_PEwkloJ5UEWXRFzPPAqnNPWzd_cf_DYase3t4O3npJJQo6KK3NKJWrLMgxaupv5aluJ_vRsGAki8u15Vt9WlimM2zpDvAgtIX5lY_nB8oqjQ">
+<div class="relative h-full p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-white">New York</h3>
+<p class="font-body-sm text-white/60">US • 9:42 AM</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">sunny</span>
+</div>
+<div class="flex items-end justify-between">
+<div class="space-y-xs">
+<p class="font-label-caps text-secondary">CLEAR SKY</p>
+<p class="font-display-temp text-[36px] leading-tight text-white">21°</p>
+</div>
+<div class="text-right">
+<p class="font-body-sm text-white/80">Hum: 45%</p>
+<p class="font-body-sm text-white/80">Wind: 8km/h</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Location Empty State -->
+<div class="relative aspect-[16/10] md:aspect-square rounded-lg overflow-hidden glass-panel glass-edge group cursor-pointer active:scale-[0.99] transition-transform"><img class="absolute inset-0 w-full h-full object-cover brightness-[0.5] group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQwCJOdSSTbCA19not0flKpXn2mu0uXSMjI_nGpof-0RPDQ6Zq_S2B-28PEqn2GhmtJqywUWg3Vb6YEZf0wxjpDpFVHhHGbhAhS-Iwr1C9WLigQRTSlzuRCJjcGNduBoTvp416zAoIGMGiIcO1AiQhgCPW734KR-Bnv64a4eHRgUY4HPmxNTQN9tbJkf0qqcep18dhR-QHmrWsE5vyzZhQHHlE_p9YrQWoNlEQb0sMtwY8OU7hxO3LgMMTalGtIBB2AeBMRTJS_w"><div class="relative h-full p-md flex flex-col justify-between"><div class="flex justify-between items-start"><div><h3 class="font-headline-md text-white">Paris</h3><p class="font-body-sm text-white/60">FR • 3:42 PM</p></div><span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">sunny</span></div><div class="flex items-end justify-between"><div class="space-y-xs"><p class="font-label-caps text-secondary">PARTLY CLOUDY</p><p class="font-display-temp text-[36px] leading-tight text-white">19°</p></div><div class="text-right"><p class="font-body-sm text-white/80">Hum: 42%</p><p class="font-body-sm text-white/80">Wind: 10km/h</p></div></div></div></div><div class="relative aspect-[16/10] md:aspect-square rounded-lg overflow-hidden glass-panel glass-edge group cursor-pointer active:scale-[0.99] transition-transform"><img class="absolute inset-0 w-full h-full object-cover brightness-[0.5] group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3D37kEUOYGsGKkg6MXKSigv7JJYXhBngzL-AwoxOOseVNwFXrvPNa75047R1P7jg9ns8SzdBl6JJVz91MdjYSUcmg6vsXF5D-HjhurwW9qdayhMucIycjsNZJfA_v-dPEzgd4Q84Hnf4-Rm_Zv3F4E5mhRgJ96FkyRDPSdZSruLA3UsxAOkvduyZD-jRRr_VovrlpkJ7I8duP1Fj2UijuHmUZ_i89QnCgHOtnUs9EXlk4kA13o8_z04xILt_fPAlOwVhaxE2_yQ"><div class="relative h-full p-md flex flex-col justify-between"><div class="flex justify-between items-start"><div><h3 class="font-headline-md text-white">Reykjavik</h3><p class="font-body-sm text-white/60">IS • 2:42 PM</p></div><span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">cloudy</span></div><div class="flex items-end justify-between"><div class="space-y-xs"><p class="font-label-caps text-primary">CLOUDY</p><p class="font-display-temp text-[36px] leading-tight text-white">8°</p></div><div class="text-right"><p class="font-body-sm text-white/80">Hum: 88%</p><p class="font-body-sm text-white/80">Wind: 34km/h</p></div></div></div></div><div class="relative aspect-[16/10] md:aspect-square rounded-lg overflow-hidden border-2 border-dashed border-white/10 flex flex-col items-center justify-center space-y-sm group cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all">
+<div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-[24px]">add_location</span>
+</div>
+<div class="text-center">
+<p class="font-headline-md text-on-surface">Add New City</p>
+<p class="font-body-sm text-on-surface-variant">Expand your sky view</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Insights / Mini Map Footer -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-md pb-lg">
+<div class="glass-panel glass-edge rounded-lg p-md flex flex-col justify-between h-36">
+<div class="flex justify-between">
+<h3 class="font-label-caps text-on-surface-variant">PRECISION RADAR</h3>
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="radar">radar</span>
+</div>
+<div class="flex-1 mt-sm rounded-md overflow-hidden relative">
+<img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3D37kEUOYGsGKkg6MXKSigv7JJYXhBngzL-AwoxOOseVNwFXrvPNa75047R1P7jg9ns8SzdBl6JJVz91MdjYSUcmg6vsXF5D-HjhurwW9qdayhMucIycjsNZJfA_v-dPEzgd4Q84Hnf4-Rm_Zv3F4E5mhRgJ96FkyRDPSdZSruLA3UsxAOkvduyZD-jRRr_VovrlpkJ7I8duP1Fj2UijuHmUZ_i89QnCgHOtnUs9EXlk4kA13o8_z04xILt_fPAlOwVhaxE2_yQ">
+<div class="absolute inset-0 bg-primary/10 backdrop-blur-[1.5px]"></div>
+</div>
+</div>
+<div class="glass-panel glass-edge rounded-lg p-md flex flex-col justify-between h-36">
+<div>
+<h3 class="font-label-caps text-on-surface-variant">WEATHER ALERTS</h3>
+<div class="mt-sm space-y-xs">
+<div class="flex items-center gap-sm p-1.5 bg-error/10 border-l-2 border-error rounded">
+<span class="material-symbols-outlined text-error text-[15px]">warning</span>
+<p class="font-body-sm text-on-surface">Heavy storm warning in Tokyo region.</p>
+</div>
+<div class="flex items-center gap-sm p-1.5 bg-secondary/10 border-l-2 border-secondary rounded">
+<span class="material-symbols-outlined text-secondary text-[15px]">info</span>
+<p class="font-body-sm text-on-surface">High UV index reported in New York.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-3 pb-safe h-14 md:hidden bg-white/10 dark:bg-white/10 backdrop-blur-xl border-t border-white/15 rounded-t-lg shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="home">home</span>
+<span class="font-label-caps text-[8px] mt-0.5">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="radar">radar</span>
+<span class="font-label-caps text-[8px] mt-0.5">Radar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary/20 text-primary rounded-lg p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="notifications" style="font-variation-settings: &quot;FILL&quot; 1;">notifications</span>
+<span class="font-label-caps text-[8px] mt-0.5">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 active:scale-95 transition-all hover:opacity-80" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+<span class="font-label-caps text-[8px] mt-0.5">Settings</span>
+</a>
+</nav>
+<script>
+        const searchInput = document.querySelector('input');
+        const recentSearches = document.querySelector('section:first-of-type div:last-child');
+        
+        searchInput.addEventListener('focus', () => {
+            recentSearches.classList.add('opacity-100');
+            recentSearches.classList.remove('opacity-70');
+        });
+
+        searchInput.addEventListener('blur', () => {
+            recentSearches.classList.add('opacity-70');
+        });
+    </script>
+
+
+
+
+</body>
 
 {% endblock %}
