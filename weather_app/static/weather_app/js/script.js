@@ -139,6 +139,25 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".wind").forEach(el => {
                 el.innerText = data.wind + " m/s";
             });
+            document.querySelectorAll('.uv').forEach(el => {
+                el.innerText = data.uv;
+            });
+            const uv = parseFloat(data.uv) || 0;
+
+            const uvBar = document.querySelector('.uvbar');
+
+            if (uv < 3) {
+                uvBar.className = 'uv-bar w-4/12 h-full bg-green-500 rounded-full';
+            }
+            else if (uv < 6) {
+                uvBar.className = 'uv-bar w-4/12 h-full bg-yellow-500 rounded-full';
+            }
+            else if (uv < 8) {
+                uvBar.className = 'uv-bar w-4/12 h-full bg-orange-500 rounded-full';
+            }
+            else {
+                uvBar.className = 'uv-bar w-4/12 h-full bg-red-500 rounded-full';
+            }
             document.getElementById('feelsLike').innerText =
                 Math.round(data.feels_like) + "°C";
             const feelsLike = data.feels_like;

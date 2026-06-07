@@ -53,6 +53,21 @@ def weather_api(request):
             "error": data.get("message", "Unknown error"),
             "full_response": data
         }, status=response.status_code)
+    
+    latitude = data["coord"]["lat"]
+    longitude = data["coord"]["lon"]
+
+    uv_url = (
+        f"https://api.open-meteo.com/v1/forecast"
+        f"?latitude={latitude}"
+        f"&longitude={longitude}"
+        f"&current=uv_index"
+    )
+
+    uv_response = requests.get(uv_url)
+    uv_data = uv_response.json()
+
+    uv_index = uv_data.get("current", {}).get("uv_index", 0)
 
     return JsonResponse({
         "city": data["name"],
@@ -66,6 +81,7 @@ def weather_api(request):
         "sunrise": data["sys"]["sunrise"],
         "sunset": data["sys"]["sunset"],
         "wind_deg": data["wind"]["deg"],
+        "uv": round(uv_index, 1)
         
     })
 
