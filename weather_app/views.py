@@ -64,7 +64,8 @@ def weather_api(request):
         "pressure": data["main"]["pressure"],
         "feels_like": data["main"]["feels_like"],
         "sunrise": data["sys"]["sunrise"],
-        "sunset": data["sys"]["sunset"]
+        "sunset": data["sys"]["sunset"],
+        "wind_deg": data["wind"]["deg"],
         
     })
 

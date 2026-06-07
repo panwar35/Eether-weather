@@ -6,60 +6,60 @@ Home
 
 {% block content %}
 <!-- Hero Section -->
-<section class="relative h-[65vh] w-full flex flex-col justify-end overflow-hidden">
-<!-- Immersive Background Image -->
-<div class="absolute inset-0 z-0">
-<img class="w-full h-full object-cover" data-alt="A panoramic, cinematic view of a majestic sunset over a distant mountain range with dramatic, wispy cirrus clouds catching the golden and violet light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4q9po99HSF5KJCPfc7KRFjYFoQRDx4mb9hWM1jgtn1tMU97SmAgLnzAYwYpweqMLoddvagIErvo0qUS0l9ffcN9rpMPyYc_hH1RBpzwCHO_gP5-L3OrUtvaZuyBQA6kXfSjCRzLHEo_8j7KEBMe_ffZ8cNj2n-FRNQvwjv1L0rvcLSgYKkDNpI2U5QW6lpNABYiqtyG9oHAqiV_ESqZn0spe4lqSN_opWjxbMAjR4PPQnhQ1Qa1VU3k_gkvzkSTz6BwnyQkvymg"/>
-<div class="absolute inset-0 hero-gradient" id="heroGradient" style="transform: translate(14.9648px, 2.80622px) scale(1.05);"></div>
-</div>
-<!-- Hero Data Overlay -->
-<div class="relative z-10 px-container-margin pb-lg max-w-4xl">
-<div class="flex flex-col md:flex-row md:items-end gap-sm md:gap-lg animate-fade-in">
-<div>
-<h1 id="city" class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-xs">Loading</h1>
-<p id="condition"class="font-body-lg text-body-lg text-white/80">Loading weather...</p>
-</div>
-<div class="flex items-baseline">
-<span id="temp" class="font-display-temp text-display-temp text-white">__°</span>
-</div>
-</div>
-<div class="mt-lg flex flex-wrap gap-md">
-<div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
-<p class="font-label-caps text-label-caps text-primary">Humidity</p>
-<p class="humidity font-headline-md text-headline-md text-white">__%</p>
-</div>
-<div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
-<p class="font-label-caps text-label-caps text-primary">Wind</p>
-<p class="wind font-headline-md text-headline-md text-white">__</p>
-</div>
-<div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
-<p class="font-label-caps text-label-caps text-primary">UV Index</p>
-<p id="uv" class="font-headline-md text-headline-md text-white">__</p>
-</div>
-<div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
-<p class="font-label-caps text-label-caps text-primary">Visibility</p>
-<p class="visibility font-headline-md text-headline-md text-white">__ mi</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Forecast Section -->
-<section class="py-lg px-container-margin bg-surface max-w-full overflow-hidden">
-<div class="flex justify-between items-center mb-md">
-<h2 class="font-headline-md text-headline-md text-on-surface" id="forecastHeading">Hourly Forecast</h2>
-<div class="glass p-1 rounded-full flex transition-all duration-700 opacity-100 translate-y-0">
-<button class="px-md py-0.5 rounded-full font-label-caps text-label-caps transition-all bg-primary text-on-primary active-pill" id="hourlyToggleBtn">Hourly</button>
-<button class="px-md py-0.5 rounded-full font-label-caps text-label-caps hover:bg-white/5 transition-all text-on-surface-variant" id="dailyToggleBtn">Daily</button>
-</div>
-</div>
-<!-- Hourly Forecast Container -->
-<div class="flex gap-md overflow-x-auto pb-sm no-scrollbar max-w-full w-full scroll-smooth" id="hourlyForecast">
+    <section class="relative h-[65vh] w-full flex flex-col justify-end overflow-hidden">
+    <!-- Immersive Background Image -->
+    <div class="absolute inset-0 z-0">
+    <img class="w-full h-full object-cover" data-alt="A panoramic, cinematic view of a majestic sunset over a distant mountain range with dramatic, wispy cirrus clouds catching the golden and violet light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4q9po99HSF5KJCPfc7KRFjYFoQRDx4mb9hWM1jgtn1tMU97SmAgLnzAYwYpweqMLoddvagIErvo0qUS0l9ffcN9rpMPyYc_hH1RBpzwCHO_gP5-L3OrUtvaZuyBQA6kXfSjCRzLHEo_8j7KEBMe_ffZ8cNj2n-FRNQvwjv1L0rvcLSgYKkDNpI2U5QW6lpNABYiqtyG9oHAqiV_ESqZn0spe4lqSN_opWjxbMAjR4PPQnhQ1Qa1VU3k_gkvzkSTz6BwnyQkvymg"/>
+    <div class="absolute inset-0 hero-gradient" id="heroGradient" style="transform: translate(14.9648px, 2.80622px) scale(1.05);"></div>
+    </div>
+    <!-- Hero Data Overlay -->
+    <div class="relative z-10 px-container-margin pb-lg max-w-4xl">
+    <div class="flex flex-col md:flex-row md:items-end gap-sm md:gap-lg animate-fade-in">
+    <div>
+    <h1 id="city" class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-xs">Loading</h1>
+    <p id="condition"class="font-body-lg text-body-lg text-white/80">Loading weather...</p>
+    </div>
+    <div class="flex items-baseline">
+    <span id="temp" class="font-display-temp text-display-temp text-white">__°</span>
+    </div>
+    </div>
+    <div class="mt-lg flex flex-wrap gap-md">
+    <div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
+    <p class="font-label-caps text-label-caps text-primary">Humidity</p>
+    <p class="humidity font-headline-md text-headline-md text-white">__%</p>
+    </div>
+    <div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
+    <p class="font-label-caps text-label-caps text-primary">Wind</p>
+    <p class="wind font-headline-md text-headline-md text-white">__</p>
+    </div>
+    <div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
+    <p class="font-label-caps text-label-caps text-primary">UV Index</p>
+    <p id="uv" class="font-headline-md text-headline-md text-white">__</p>
+    </div>
+    <div class="glass px-md py-sm rounded-xl min-w-[120px] transition-all duration-700 opacity-100 translate-y-0">
+    <p class="font-label-caps text-label-caps text-primary">Visibility</p>
+    <p class="visibility font-headline-md text-headline-md text-white">__ mi</p>
+    </div>
+    </div>
+    </div>
+    </section>
+    <!-- Forecast Section -->
+    <section class="py-lg px-container-margin bg-surface max-w-full overflow-hidden">
+    <div class="flex justify-between items-center mb-md">
+    <h2 class="font-headline-md text-headline-md text-on-surface" id="forecastHeading">Hourly Forecast</h2>
+    <div class="glass p-1 rounded-full flex transition-all duration-700 opacity-100 translate-y-0">
+    <button class="px-md py-0.5 rounded-full font-label-caps text-label-caps transition-all bg-primary text-on-primary active-pill" id="hourlyToggleBtn">Hourly</button>
+    <button class="px-md py-0.5 rounded-full font-label-caps text-label-caps hover:bg-white/5 transition-all text-on-surface-variant" id="dailyToggleBtn">Daily</button>
+    </div>
+    </div>
+    <!-- Hourly Forecast Container -->
+    <div class="flex gap-md overflow-x-auto pb-sm no-scrollbar max-w-full w-full scroll-smooth" id="hourlyForecast">
 
-</div>
-<!-- 6-Day Forecast Container (Hidden by default) -->
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-md max-w-full w-full hidden" id="dailyForecast">
-</div>
-</section>
+    </div>
+    <!-- 6-Day Forecast Container (Hidden by default) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-md max-w-full w-full hidden" id="dailyForecast">
+    </div>
+    </section>
 <!-- Precision Data Bento Grid -->
 <section class="py-lg px-container-margin grid grid-cols-1 md:grid-cols-3 gap-md max-w-full overflow-hidden">
 <!-- Air Quality Index Card -->
@@ -125,7 +125,7 @@ Home
 </div>
 <div>
 <p class="wind font-display-temp text-2xl text-on-surface">__<span class="text-sm text-on-surface-variant">mph</span></p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Gusts up to -- mph from the NE</p>
+<p id="windDirection" class="font-body-sm text-body-sm text-on-surface-variant">Loading...</p>
 </div>
 </div>
 </div>
@@ -135,15 +135,21 @@ Home
 <span class="text-on-surface-variant">Pressure</span>
 <span id="pressure" class="text-on-surface">--inHg</span>
 </div>
-<div class="h-1 bg-white/10 rounded-full">
-<div class="h-full w-3/4 bg-primary/60 rounded-full"></div>
+<div class="h-1 bg-white/10 rounded-full overflow-hidden">
+    <div id="pressureBar"
+         class="h-full bg-primary/60 rounded-full"
+         style="width:75%;">
+    </div>
 </div>
 <div class="flex justify-between font-label-caps text-label-caps">
 <span class="text-on-surface-variant">Humidity</span>
-<span class="humidity font-headline-md text-headline-md text-on-surface">--%</span>
+<span class="humidity text-on-surface">--%</span>
 </div>
-<div class="h-1 bg-white/10 rounded-full">
-<div class="h-full w-[42%] bg-primary/60 rounded-full"></div>
+<div class="h-1 bg-white/10 rounded-full overflow-hidden">
+    <div id="humidityBar"
+         class="h-full bg-primary/60 rounded-full"
+         style="width:42%;">
+    </div>
 </div>
 </div>
 </div>
@@ -159,18 +165,18 @@ Home
 </div>
 <div>
 <p class="font-label-caps text-label-caps text-primary mb-xs">Visibility</p>
-<p class="visibility font-headline-md text-headline-md text-on-surface">10 mi</p>
+<p class="visibility font-headline-md text-headline-md text-on-surface">--</p>
 <p class="text-[10px] text-on-surface-variant font-label-caps mt-xs">Clear sky visibility</p>
 </div>
 <div>
 <p class="font-label-caps text-label-caps text-primary mb-xs">Dew Point</p>
-<p class="font-headline-md text-headline-md text-on-surface">52°</p>
+<p id="dewPoint" class="font-headline-md text-headline-md text-on-surface">--°</p>
 <p class="text-[10px] text-on-surface-variant font-label-caps mt-xs">Current dew point</p>
 </div>
 <div>
 <p class="font-label-caps text-label-caps text-primary mb-xs">Feels Like</p>
-<p class="font-headline-md text-headline-md text-on-surface">67°</p>
-<p class="text-[10px] text-on-surface-variant font-label-caps mt-xs">Wind chill adjusted</p>
+<p id="feelsLike" class="font-headline-md text-headline-md text-on-surface">--°</p>
+<p id="feelsLikeComment" class="text-[10px] text-on-surface-variant font-label-caps mt-xs">--</p>
 </div>
 </div>
 <!-- Precipitation Map Card -->

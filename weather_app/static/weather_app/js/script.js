@@ -139,6 +139,75 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".wind").forEach(el => {
                 el.innerText = data.wind + " m/s";
             });
+            document.getElementById('feelsLike').innerText =
+                Math.round(data.feels_like) + "°C";
+            const feelsLike = data.feels_like;
+            const wind = data.wind;
+
+            let comment = "";
+
+            if (feelsLike < 10 && wind > 5) {
+                comment = "Chilly wind conditions";
+            }
+            else if (feelsLike < 20) {
+                comment = "Cool weather";
+            }
+            else if (feelsLike < 30) {
+                comment = "Pleasant outside";
+            }
+            else if (feelsLike < 35) {
+                comment = "Warm and sunny";
+            }
+            else if (feelsLike < 40) {
+                comment = "Hot weather";
+            }
+            else {
+                comment = "Extreme heat warning";
+            }
+
+            document.getElementById("feelsLikeComment").innerText = comment;
+
+            const dewPoint =
+                data.temp - ((100 - data.humidity) / 5);
+
+            document.getElementById('dewPoint').innerText =
+                Math.round(dewPoint) + "°C";
+            
+            function getDirection(deg) {
+                const directions = [
+                    "N", "NE", "E", "SE",
+                    "S", "SW", "W", "NW"
+                ];
+
+                return directions[Math.round(deg / 45) % 8];
+            }
+            document.getElementById('windDirection').innerText =
+                `Wind from ${getDirection(data.wind_deg)}`;
+            document.getElementById('pressure').innerText = data.pressure + " hPa";
+
+            // Pressure
+            const pressureBar = document.getElementById("pressureBar");
+
+            if (pressureBar) {
+                const minPressure = 950;
+                const maxPressure = 1050;
+
+                let percent =
+                    ((data.pressure - minPressure) /
+                        (maxPressure - minPressure)) * 100;
+
+                percent = Math.max(0, Math.min(100, percent));
+
+                pressureBar.style.width = percent + "%";
+            }
+
+            // Humidity
+            const humidityBar = document.getElementById("humidityBar");
+
+            if (humidityBar) {
+                humidityBar.style.width = data.humidity + "%";
+            }
+
             document.querySelectorAll('.visibility').forEach(el => {
                 el.innerText = (data.visibility / 1000).toFixed(1) + " km";
             });
@@ -219,43 +288,58 @@ document.addEventListener("DOMContentLoaded", function () {
                 sunDot.style.backgroundColor = "#90CAF9";
                 sunDot.style.boxShadow = "0 0 12px rgba(144,202,249,0.7)";
             }
-
-            document.getElementById('pressure').innerText = data.pressure + " hPa";
-            // HUMIDITY BAR
-            const humidityBar = document.getElementById('humidityBar');
-
-            humidityBar.style.width = data.humidity + "%";
-
-            // PRESSURE BAR
-            const pressureBar = document.getElementById('pressureBar');
-
-            const minPressure = 950;
-            const maxPressure = 1050;
-
-            let pressurePercent =
-                ((data.pressure - minPressure) /
-                    (maxPressure - minPressure)) * 100;
-
-            pressurePercent =
-                Math.min(Math.max(pressurePercent, 0), 100);
-
-            pressureBar.style.width = pressurePercent + "%";
-            document.getElementById('feels_like').innerText = data.feels_like + "°C";
-
             
         });
 
 });
+
+function getWeatherIcon(condition, hour) {
+
+    const isNight = hour >= 18 || hour < 6;
+
+    condition = (condition || '').toLowerCase();
+
+    if (condition.includes('rain')) return 'rainy';
+    if (condition.includes('drizzle')) return 'rainy';
+    if (condition.includes('thunder')) return 'thunderstorm';
+    if (condition.includes('snow')) return 'weather_snowy';
+    if (condition.includes('mist') || condition.includes('fog') || condition.includes('haze')) return 'foggy';
+
+    if (condition.includes('cloud')) {
+        return isNight ? 'cloud' : 'partly_cloudy_day';
+    }
+
+    return isNight ? 'clear_night' : 'sunny';
+}
 
 fetch('/api/forecast/?city=Delhi')
     .then(res => res.json())
     .then(data => {
 
         const container = document.getElementById('hourlyForecast');
-
         container.innerHTML = '';
 
-        data.forecast.forEach(item => {
+        const hourlyForecast = [];
+
+        for (let i = 0; i < 15; i++) {
+
+            const forecastIndex = Math.floor(i / 3);
+            const source = data.forecast[forecastIndex];
+
+            if (!source) break;
+
+            const [hour] = source.time.split(':');
+
+            const fakeHour = (parseInt(hour) + (i % 3)) % 24;
+
+            hourlyForecast.push({
+                time: `${String(fakeHour).padStart(2, '0')}:00`,
+                temp: source.temp,
+                condition: source.condition || source.weather || 'Clear'
+            });
+        }
+
+        hourlyForecast.forEach(item => {
 
             container.innerHTML += `
                 <div class="glass min-w-[85px] flex flex-col items-center py-md rounded-xl border-t border-l border-white/10">
@@ -264,7 +348,7 @@ fetch('/api/forecast/?city=Delhi')
                     </span>
 
                     <span class="material-symbols-outlined text-secondary text-2xl mb-sm">
-                        partly_cloudy_day
+                        ${getWeatherIcon(item.condition, parseInt(item.time))}
                     </span>
 
                     <span class="font-data-mono text-data-mono text-white text-md">
@@ -275,6 +359,22 @@ fetch('/api/forecast/?city=Delhi')
         });
 
     });
+
+    function getDailyIcon(condition) {
+
+    condition = (condition || '').toLowerCase();
+
+    if (condition.includes('rain')) return 'rainy';
+    if (condition.includes('drizzle')) return 'rainy';
+    if (condition.includes('thunder')) return 'thunderstorm';
+    if (condition.includes('snow')) return 'weather_snowy';
+    if (condition.includes('mist')) return 'foggy';
+    if (condition.includes('fog')) return 'foggy';
+    if (condition.includes('haze')) return 'foggy';
+    if (condition.includes('cloud')) return 'cloud';
+
+    return 'sunny';
+}
 
     fetch('/api/daily-forecast/?city=Delhi')
     .then(res => res.json())
@@ -297,7 +397,7 @@ fetch('/api/forecast/?city=Delhi')
                     <div class="flex items-center justify-between mb-md">
 
                         <span class="material-symbols-outlined text-secondary text-3xl">
-                            partly_cloudy_day
+                            ${getDailyIcon(day.condition)}
                         </span>
 
                         <div class="text-right">
