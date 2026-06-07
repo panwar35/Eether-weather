@@ -221,6 +221,25 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             document.getElementById('pressure').innerText = data.pressure + " hPa";
+            // HUMIDITY BAR
+            const humidityBar = document.getElementById('humidityBar');
+
+            humidityBar.style.width = data.humidity + "%";
+
+            // PRESSURE BAR
+            const pressureBar = document.getElementById('pressureBar');
+
+            const minPressure = 950;
+            const maxPressure = 1050;
+
+            let pressurePercent =
+                ((data.pressure - minPressure) /
+                    (maxPressure - minPressure)) * 100;
+
+            pressurePercent =
+                Math.min(Math.max(pressurePercent, 0), 100);
+
+            pressureBar.style.width = pressurePercent + "%";
             document.getElementById('feels_like').innerText = data.feels_like + "°C";
 
             

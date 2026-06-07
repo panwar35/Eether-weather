@@ -9,7 +9,7 @@ def location(request):
 
 import os
 
-API_KEY = os.environ.get("OPENWEATHER_API_KEY")
+API_KEY = "e952c44ec69ed7e99ee87c8f5f9b74c9"
 
 def pm25_to_aqi(pm25):
     breakpoints = [
