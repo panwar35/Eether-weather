@@ -56,9 +56,11 @@ MIDDLEWARE = [
     
 ]
 
-STATICFILES_STORAGE = (
-    "whitenoise.storage.CompressedManifestStaticFilesStorage"
-)
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 ROOT_URLCONF = 'weather_project.urls'
 
